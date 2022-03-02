@@ -1,9 +1,8 @@
 using JenkinsNET.Models;
 
-#if NET_ASYNC
+
 using System.Threading;
 using System.Threading.Tasks;
-#endif
 
 namespace JenkinsNET
 {
@@ -44,7 +43,7 @@ namespace JenkinsNET
         /// <exception cref="Exceptions.JenkinsNetException"></exception>
         Jenkins Get();
 
-    #if NET_ASYNC
+    
         /// <summary>
         /// Updates the security Crumb attached to this client asynchronously.
         /// </summary>
@@ -58,6 +57,5 @@ namespace JenkinsNET
         /// <param name="token">An optional token for aborting the request.</param>
         /// <exception cref="Exceptions.JenkinsNetException"></exception>
         Task<Jenkins> GetAsync(CancellationToken token = default);
-    #endif
     }
 }

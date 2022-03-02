@@ -4,9 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 
-#if NET_ASYNC
+
 using System.Threading.Tasks;
-#endif
 
 namespace JenkinsNET.Utilities
 {
@@ -119,7 +118,7 @@ namespace JenkinsNET.Utilities
             return Process(jobName, buildResult, queueStartTime);
         }
 
-    #if NET_ASYNC
+    
         /// <summary>
         /// Run the Job asynchronously.
         /// </summary>
@@ -142,7 +141,6 @@ namespace JenkinsNET.Utilities
 
             return await ProcessAsync(jobName, buildResult, queueStartTime);
         }
-    #endif
 
         /// <summary>
         /// Run the Job with parameters.
@@ -168,7 +166,7 @@ namespace JenkinsNET.Utilities
             return Process(jobName, buildResult, queueStartTime);
         }
 
-    #if NET_ASYNC
+    
         /// <summary>
         /// Run the Job asynchronously with parameters.
         /// </summary>
@@ -192,7 +190,6 @@ namespace JenkinsNET.Utilities
 
             return await ProcessAsync(jobName, buildResult, queueStartTime);
         }
-    #endif
 
         /// <exception cref="JenkinsNetException"></exception>
         /// <exception cref="JenkinsJobBuildException"></exception>
@@ -247,7 +244,7 @@ namespace JenkinsNET.Utilities
             return buildItem;
         }
 
-    #if NET_ASYNC
+    
         /// <exception cref="JenkinsNetException"></exception>
         /// <exception cref="JenkinsJobBuildException"></exception>
         /// <exception cref="JenkinsJobGetBuildException"></exception>
@@ -300,7 +297,6 @@ namespace JenkinsNET.Utilities
             SetStatus(JenkinsJobStatus.Complete);
             return buildItem;
         }
-    #endif
 
         private void TextReader_TextChanged(string newText)
         {

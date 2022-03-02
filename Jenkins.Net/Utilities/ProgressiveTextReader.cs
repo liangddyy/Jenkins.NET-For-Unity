@@ -1,8 +1,6 @@
 ﻿using System;
-
-#if !NET40
 using System.Threading.Tasks;
-#endif
+
 
 namespace JenkinsNET.Utilities
 {
@@ -73,7 +71,6 @@ namespace JenkinsNET.Utilities
                 IsComplete = true;
         }
 
-    #if !NET40
         /// <summary>
         /// Retrieves and appends any additional text returned
         /// by the running Jenkins Job asynchronously.
@@ -93,6 +90,5 @@ namespace JenkinsNET.Utilities
             if (!result.MoreData)
                 IsComplete = true;
         }
-    #endif
     }
 }

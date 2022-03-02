@@ -29,13 +29,13 @@ namespace JenkinsNET.Internal.Commands
                 WriteXml(request, job.Node);
             };
 
-        #if NET_ASYNC
+        
             OnWriteAsync = async (request, token) => {
                 request.Method = "POST";
                 request.ContentType = "application/xml";
                 await WriteXmlAsync(request, job.Node, token);
             };
-        #endif
+        
         }
     }
 }

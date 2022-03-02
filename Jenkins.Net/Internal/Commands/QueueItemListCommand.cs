@@ -37,7 +37,7 @@ namespace JenkinsNET.Internal.Commands
                 }
             };
 
-        #if NET_ASYNC
+        
             OnWriteAsync = async (request, token) => {
                 request.Method = "GET";
             };
@@ -53,7 +53,7 @@ namespace JenkinsNET.Internal.Commands
                         .Select(node => new JenkinsQueueItem(node)).ToArray();
                 }
             };
-        #endif
+        
         }
     }
 }

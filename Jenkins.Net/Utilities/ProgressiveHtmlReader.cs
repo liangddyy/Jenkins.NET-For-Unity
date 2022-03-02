@@ -1,8 +1,7 @@
 ﻿using System;
 
-#if !NET40
 using System.Threading.Tasks;
-#endif
+
 
 namespace JenkinsNET.Utilities
 {
@@ -26,7 +25,7 @@ namespace JenkinsNET.Utilities
         /// <summary>
         /// Gets whether the reading of HTML has completed.
         /// </summary>
-        public bool IsComplete {get; private set;}
+        public bool IsComplete { get; private set; }
 
         /// <summary>
         /// Occurs when the value of <see cref="Html"/> is changed.
@@ -36,7 +35,7 @@ namespace JenkinsNET.Utilities
         /// <summary>
         /// Gets the HTML that has been retrieved.
         /// </summary>
-        public string Html {get; private set;}
+        public string Html { get; private set; }
 
 
         /// <summary>
@@ -63,7 +62,8 @@ namespace JenkinsNET.Utilities
 
             var result = client.Builds.GetProgressiveHtml(jobName, buildNumber, readPos);
 
-            if (result.Size > 0) {
+            if (result.Size > 0)
+            {
                 Html += result.Html;
                 HtmlChanged?.Invoke(result.Html);
                 readPos = result.Size;
@@ -73,7 +73,6 @@ namespace JenkinsNET.Utilities
                 IsComplete = true;
         }
 
-    #if !NET40
         /// <summary>
         /// Retrieves and appends any additional text returned
         /// by the running Jenkins Job asynchronously.
@@ -84,7 +83,8 @@ namespace JenkinsNET.Utilities
 
             var result = await client.Builds.GetProgressiveHtmlAsync(jobName, buildNumber, readPos);
 
-            if (result.Size > 0) {
+            if (result.Size > 0)
+            {
                 Html += result.Html;
                 HtmlChanged?.Invoke(result.Html);
                 readPos = result.Size;
@@ -93,6 +93,5 @@ namespace JenkinsNET.Utilities
             if (!result.MoreData)
                 IsComplete = true;
         }
-    #endif
     }
 }

@@ -60,7 +60,7 @@ namespace JenkinsNET.Internal.Commands
                 }
             };
 
-        #if NET_ASYNC
+        
             OnWriteAsync = async (request, token) => {
                 request.Method = "POST";
                 request.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
@@ -92,7 +92,6 @@ namespace JenkinsNET.Internal.Commands
                     Result.Html = await stream.ReadToEndAsync(encoding, token);
                 }
             };
-        #endif
         }
     }
 }

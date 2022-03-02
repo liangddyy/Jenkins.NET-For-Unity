@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Web;
+using UnityEngine.Networking;
 
 namespace JenkinsNET.Internal.Commands
 {
@@ -46,7 +47,7 @@ namespace JenkinsNET.Internal.Commands
                 };
             };
 
-        #if NET_ASYNC
+        
             OnWriteAsync = async (request, token) => {
                 request.Method = "POST";
             };
@@ -59,7 +60,7 @@ namespace JenkinsNET.Internal.Commands
                     QueueItemUrl = response.GetResponseHeader("Location"),
                 };
             };
-        #endif
+        
         }
 
         private void WriteJobParameters(TextWriter writer, IDictionary<string, string> jobParameters)
@@ -73,8 +74,8 @@ namespace JenkinsNET.Internal.Commands
                     writer.Write('&');
                 }
 
-                var encodedName = HttpUtility.UrlEncode(pair.Key);
-                var encodedValue = HttpUtility.UrlEncode(pair.Value);
+                var encodedName = UnityWebRequest.EscapeURL(pair.Key);
+                var encodedValue = UnityWebRequest.EscapeURL(pair.Value);
 
                 writer.Write(encodedName);
                 writer.Write('=');

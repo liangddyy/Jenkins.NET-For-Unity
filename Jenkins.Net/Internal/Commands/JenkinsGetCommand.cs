@@ -28,7 +28,7 @@ namespace JenkinsNET.Internal.Commands
                 Result = new Jenkins(document.Root);
             };
 
-        #if NET_ASYNC
+        
             OnWriteAsync = async (request, token) => {
                 request.Method = "GET";
             };
@@ -37,7 +37,7 @@ namespace JenkinsNET.Internal.Commands
                 var document = await ReadXmlAsync(response);
                 Result = new Jenkins(document.Root);
             };
-        #endif
+        
         }
     }
 }

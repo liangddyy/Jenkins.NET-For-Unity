@@ -31,7 +31,7 @@ namespace JenkinsNET.Internal.Commands
                 Result = Activator.CreateInstance(typeof(T), document.Root) as T;
             };
 
-        #if NET_ASYNC
+        
             OnWriteAsync = async (request, token) => {
                 request.Method = "GET";
             };
@@ -40,7 +40,7 @@ namespace JenkinsNET.Internal.Commands
                 var document = await ReadXmlAsync(response);
                 Result = Activator.CreateInstance(typeof(T), document.Root) as T;
             };
-        #endif
+        
         }
     }
 }

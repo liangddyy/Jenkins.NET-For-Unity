@@ -1,9 +1,9 @@
 ﻿using JenkinsNET.Models;
 using System;
 
-#if NET_ASYNC
+
 using System.Threading.Tasks;
-#endif
+
 
 namespace JenkinsNET.Internal.Commands
 {
@@ -35,7 +35,7 @@ namespace JenkinsNET.Internal.Commands
                 Result = new JenkinsProject(document.Root);
             };
 
-        #if NET_ASYNC
+        
             OnWriteAsync = async (request, token) => {
                 request.Method = "GET";
             };
@@ -44,7 +44,7 @@ namespace JenkinsNET.Internal.Commands
                 var document = await ReadXmlAsync(response);
                 Result = new JenkinsProject(document.Root);
             };
-        #endif
+        
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Web;
+using UnityEngine.Networking;
 
 namespace JenkinsNET.Internal
 {
@@ -28,11 +29,11 @@ namespace JenkinsNET.Internal
                 builder.Append(i > 0 ? "&" : "?");
                 i++;
 
-                var eKey = HttpUtility.UrlEncode(arg.Key);
+                var eKey = UnityWebRequest.EscapeURL(arg.Key);
                 var eValue = string.Empty;
 
                 if (arg.Value != null)
-                    eValue = HttpUtility.UrlEncode(arg.Value.ToString());
+                    eValue = UnityWebRequest.EscapeURL(arg.Value.ToString());
 
                 builder.Append(eKey);
                 builder.Append("=");

@@ -33,7 +33,7 @@ namespace JenkinsNET.Internal.Commands
                 }
             };
 
-        #if NET_ASYNC
+        
             OnWriteAsync = async (request, token) => {
                 request.Method = "GET";
             };
@@ -48,7 +48,7 @@ namespace JenkinsNET.Internal.Commands
                     Result = new JenkinsCrumb(document.Root);
                 }
             };
-        #endif
+        
         }
     }
 }

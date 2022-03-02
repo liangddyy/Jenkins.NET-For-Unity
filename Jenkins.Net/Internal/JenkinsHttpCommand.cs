@@ -7,10 +7,10 @@ using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
 
-#if NET_ASYNC
+
 using System.Threading;
 using System.Threading.Tasks;
-#endif
+
 
 namespace JenkinsNET.Internal
 {
@@ -23,10 +23,10 @@ namespace JenkinsNET.Internal
         public Action<HttpWebRequest> OnWrite {get; set;}
         public Action<HttpWebResponse> OnRead {get; set;}
 
-    #if NET_ASYNC
+    
         public Func<HttpWebRequest, CancellationToken, Task> OnWriteAsync {get; set;}
         public Func<HttpWebResponse, CancellationToken, Task> OnReadAsync {get; set;}
-    #endif
+    
 
 
         public void Run()
@@ -40,7 +40,6 @@ namespace JenkinsNET.Internal
             }
         }
 
-    #if NET_ASYNC
         public async Task RunAsync(CancellationToken token = default)
         {
             var request = CreateRequest();
@@ -54,7 +53,7 @@ namespace JenkinsNET.Internal
                 if (OnReadAsync != null) await OnReadAsync.Invoke(response, token);
             }
         }
-    #endif
+    
 
         private HttpWebRequest CreateRequest()
         {
@@ -66,7 +65,8 @@ namespace JenkinsNET.Internal
             request.UserAgent = "Jenkins.NET Client";
             request.AllowAutoRedirect = true;
             request.KeepAlive = true;
-
+            // 设置短一点超时时间,毫秒
+            request.Timeout = 1500;
             if (Crumb != null)
                 request.Headers.Add(Crumb.CrumbRequestField, Crumb.Crumb);
 
@@ -108,7 +108,7 @@ namespace JenkinsNET.Internal
             }
         }
 
-    #if NET_ASYNC
+    
         protected async Task<XDocument> ReadXmlAsync(HttpWebResponse response)
         {
             using (var stream = response.GetResponseStream()) {
@@ -137,7 +137,7 @@ namespace JenkinsNET.Internal
                 node.WriteTo(writer);
             }
         }
-    #endif
+    
 
         protected static Encoding TryGetEncoding(string name, Encoding fallback)
         {

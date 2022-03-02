@@ -35,7 +35,7 @@ namespace JenkinsNET.Internal.Commands
                 Result = Activator.CreateInstance(typeof(T), args) as T;
             };
 
-        #if NET_ASYNC
+        
             OnWriteAsync = async (request, token) => {
                 request.Method = "POST";
             };
@@ -46,7 +46,7 @@ namespace JenkinsNET.Internal.Commands
                 var args = new object[] {document.Root};
                 Result = Activator.CreateInstance(typeof(T), args) as T;
             };
-        #endif
+        
         }
     }
 }
